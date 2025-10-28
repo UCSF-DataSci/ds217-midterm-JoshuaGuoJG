@@ -1,0 +1,4 @@
+Analysis Report:
+There is no difference in dropout rates between intervention groups and number of participants in each group.
+Treatment a shows a lower average cardiovascular disease (CVD) rate compared to treatment b and control.
+The adherence percentage is similar across all groups.

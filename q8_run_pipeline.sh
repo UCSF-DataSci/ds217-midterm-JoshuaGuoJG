@@ -7,10 +7,40 @@
 # NOTE: Q3 (q3_data_utils.py) is a library imported by the notebooks, not run directly
 # NOTE: The main pipeline runs Q4-Q7 notebooks in order
 
+#!/bin/bash
 echo "Starting clinical trial data pipeline..." > reports/pipeline_log.txt
 
 # TODO: Run analysis notebooks in order (q4-q7) using nbconvert with error handling
 # Use either `$?` or `||` operator to check exit codes and stop on failure
 # Add a log entry for each notebook execution or failure
 # jupyter nbconvert --execute --to notebook q4_exploration.ipynb
+
+jupyter nbconvert --execute --to notebook q4_exploration.ipynb
+if [ $? -ne 0 ]; then
+    echo "ERROR: Q4 exploration failed"
+    exit 1
+fi
+echo "Q4 exploration completed successfully"
+
+jupyter nbconvert --execute --to notebook q5_missing_data.ipynb
+if [ $? -ne 0 ]; then
+    echo "ERROR: Q5 missing data analysis failed"
+    exit 1
+fi
+echo "Q5 missing data analysis completed successfully"
+
+jupyter nbconvert --execute --to notebook q6_transformation.ipynb
+if [ $? -ne 0 ]; then
+    echo "ERROR: Q6 transformation failed"
+    exit 1
+fi
+echo "Q6 transformation completed successfully"
+
+jupyter nbconvert --execute --to notebook q7_aggregation.ipynb
+if [ $? -ne 0 ]; then
+    echo "ERROR: Q7 aggregation failed"
+    exit 1
+fi
+echo "Q7 aggregation completed successfully"
+
 echo "Pipeline complete!" >> reports/pipeline_log.txt
