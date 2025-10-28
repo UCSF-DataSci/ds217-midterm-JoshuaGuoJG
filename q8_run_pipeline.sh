@@ -15,32 +15,28 @@ echo "Starting clinical trial data pipeline..." > reports/pipeline_log.txt
 # Add a log entry for each notebook execution or failure
 # jupyter nbconvert --execute --to notebook q4_exploration.ipynb
 
-jupyter nbconvert --execute --to notebook q4_exploration.ipynb
-if [ $? -ne 0 ]; then
+jupyter nbconvert --execute --to notebook q4_exploration.ipynb|| {
     echo "ERROR: Q4 exploration failed"
     exit 1
-fi
-echo "Q4 exploration completed successfully"
+}
+echo "Q4 exploration completed successfully" >> reports/pipeline_log.txt
 
-jupyter nbconvert --execute --to notebook q5_missing_data.ipynb
-if [ $? -ne 0 ]; then
+jupyter nbconvert --execute --to notebook q5_missing_data.ipynb|| {
     echo "ERROR: Q5 missing data analysis failed"
     exit 1
-fi
-echo "Q5 missing data analysis completed successfully"
+}
+echo "Q5 missing data analysis completed successfully" >> reports/pipeline_log.txt
 
-jupyter nbconvert --execute --to notebook q6_transformation.ipynb
-if [ $? -ne 0 ]; then
+jupyter nbconvert --execute --to notebook q6_transformation.ipynb|| {
     echo "ERROR: Q6 transformation failed"
     exit 1
-fi
-echo "Q6 transformation completed successfully"
+}
+echo "Q6 transformation completed successfully" >> reports/pipeline_log.txt
 
-jupyter nbconvert --execute --to notebook q7_aggregation.ipynb
-if [ $? -ne 0 ]; then
+jupyter nbconvert --execute --to notebook q7_aggregation.ipynb|| {
     echo "ERROR: Q7 aggregation failed"
     exit 1
-fi
-echo "Q7 aggregation completed successfully"
+}
+echo "Q7 aggregation completed successfully" >> reports/pipeline_log.txt
 
 echo "Pipeline complete!" >> reports/pipeline_log.txt
